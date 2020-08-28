@@ -1,0 +1,154 @@
+
+<link rel="stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<body style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTi0soP13aHgyjScBXkucYTDWyDFX9TdntdNKIz8ryJljoGLPud&usqp=CAU');background-repeat: no-repeat;
+background-size: cover;">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+    
+    <a class="navbar-brand" href="/index">EliteYachts</a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ">
+            <%if(!currentUser){%>
+                <li class="nav-item"><a class="nav-link" href="/login">Login</a> </li>
+                <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a> </li>
+                <%} else {%>
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a> </li>
+                <li class="nav-item"><a class="nav-link" href="/profile">Profile</a> </li>
+                <%}%>
+            
+            
+        </ul>
+    </div>
+           
+</nav>
+<p></p>
+<div class="container"> 
+    <% if(error && error.length>0){ %>
+        <div class="alert alert-danger" role="alert"><%=error%> </div>
+        <%}%>
+
+    <% if(success && success.length>0){ %>
+        <div class="alert alert-success" role="alert"><%=success%> </div>
+
+
+    <%}%>
+
+</div>  
+<p></p>
+
+<div class="container">
+
+    
+    
+
+
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <p class="navbar-brand">EliteYachts</p>
+            <div class="list-group">
+                <li class="list-group-item active"> Info </li>
+                <li class="list-group-item"> Info 2 </li>
+                <li class="list-group-item"> Info 3 </li>
+            </div>
+
+
+            <div style="display: flex;">
+                <h4 style="margin: auto;      background-position-x: center;  background-image: url('https://img.icons8.com/ios-filled/72/anchor.png');
+                background-size: 100px;
+                height: 200px;
+                background-repeat: no-repeat;
+                background-position-y: 35px;"><div  style="margin-top: 110px;">  </div></h4>
+                
+
+
+            </div>
+            
+
+        </div>
+
+        
+        
+        
+        
+
+        <div class="col-md-9" >
+            <div class="thumbnail">
+                <img  style="width: 100%;" class="img-fluid" src="<%=yacht.image %>">
+            </div>
+            <div class="card card-body sm-light">
+                <div class="caption-full">
+                    <h4 class="float-right">$<%=yacht.price%> </h4>
+                    <h4><a><%=yacht.name%></a></h4>
+                    <p><%=yacht.description%></p>
+                    <p><em>Submitted by : <%=yacht.author.username%>, <%= moment(yacht.createdAt).fromNow() %> </em></p>
+                        <% if (currentUser && yacht.author.id.equals(currentUser._id)){%>
+                            <a class="btn btn-warning btn-sm" href="/index/<%=yacht._id%>/edit">Edit</a>
+                            <form style="display: inline;" action="/index/<%=yacht._id%>?_method=DELETE" method="POST">
+                            <button  class="btn btn-danger btn-sm">Delete</button>
+                        
+                        </form>
+
+                        <%}%>
+                </div>
+            
+
+            
+                <div class="text-right">
+                    <a href="/index/<%=yacht._id%>/like"><button class="btn btn-primary">Like</button></a>
+                    <a  href="/index/<%=yacht._id%>/comments/newC"> <button class="btn btn-primary"> Add New Comment </button></a>
+                </div>
+                <hr>
+                <% yacht.comments.forEach(function(comment){%>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author.username%></strong>
+                            <p>
+                                <%= comment.text%>
+                                <span style="display: inline;" class="float-right"><%= moment(comment.createdAt).fromNow() %></span>
+                            </p>
+
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <form  action="/index/<%=yacht._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST"> 
+                                    <button class="btn btn-danger btn-sm" > Delete  </button>
+                                </form>
+                            <%}%>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    
+                
+                <%}) %>
+                
+            </div>  
+            
+
+        </div>
+    </div>
+
+
+
+</div>
+
+</body>
+
+<script>
+function saveYacht(){
+    console.log(currentUser);
+}
+</script>
+
+
+
+
+

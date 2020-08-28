@@ -1,0 +1,214 @@
+<link rel="stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+<body style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTi0soP13aHgyjScBXkucYTDWyDFX9TdntdNKIz8ryJljoGLPud&usqp=CAU');background-repeat: no-repeat;
+background-size: cover;">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/index">EliteYachts</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto ">
+            <%if(!currentUser){%>
+                <li class="nav-item"><a class="nav-link" href="/login">Login</a> </li>
+                <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a> </li>
+                <%} else {%>
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a> </li>
+
+                <%}%>
+            
+            
+        </ul>
+    </div>
+           
+</nav>
+<p></p>
+<div class="container"> 
+    <% if(error && error.length>0){ %>
+        <div class="alert alert-danger" role="alert"><%=error%> </div>
+        <%}%>
+
+    <% if(success && success.length>0){ %>
+        <div class="alert alert-success" role="alert"><%=success%> </div>
+
+
+    <%}%>
+
+</div>
+
+
+
+<div class="profile-container" style="display: flex; width: 100vw;">
+  <div class="left" style="width: 30vw; text-align: center;">
+    <img src="<%=currentUser.profilePic%>" class="profilepic" style="border: #222; height: 250px; width: auto; margin: 10% 0 0 0;">
+    <h1><%=currentUser.username%></h1>
+    <h2><%=currentUser.email%></h2>
+    <h2><%=currentUser.number%></h2>
+    <p><%=currentUser.about%></p>
+  </div>
+  <div class="right" style="width: 70vw; padding: 0 10vw">
+
+  <div style="text-align: center;" class="saved">
+    <h1><%=currentUser.username%>'s Saved Yachts</h1>
+    <% yachts.forEach(function(yacht){%>
+      <% if (yacht.likes.includes(currentUser.id)){ %>
+      <div class="mySlides">
+        <img src= "<%=yacht.image%>" style="width:100%">
+      </div>
+      <%}}) %>
+        
+      <a style="color: white; left: 1%;" class="prev" onclick="plusSlides(-1)">❮</a>
+      <a style="color: white;" class="next" onclick="plusSlides(1)">❯</a>
+
+      <div class="row">
+        <% yachts.forEach(function(yacht){%>
+          <% if (yacht.likes.includes(currentUser.id)){ %>
+        <div class="column">
+          <img class="preview cursor" src="<%=yacht.image%>" style="width:100%" onclick="currentSlide(1)">
+        </div>
+        <%}}) %>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+</body>
+
+
+<style>
+    body {
+      font-family: Arial;
+      margin: 0;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    img {
+      vertical-align: middle;
+    }
+    
+    /* Position the image container (needed to position the left and right arrows) */
+    .saved {
+      position: relative;
+    }
+    
+    /* Hide the images by default */
+    .mySlides {
+      display: none;
+    }
+    
+    /* Add a pointer when hovering over the thumbnail images */
+    .cursor {
+      cursor: pointer;
+    }
+    
+    /* Next & previous buttons */
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 15%;
+      width: 100px;
+      padding: 16px;
+      margin-top: -50px;
+      color: white;
+      font-weight: bold;
+      font-size: 40px;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    
+    /* Position the "next button" to the right */
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+    
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover,
+    .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    /* Number text (1/3 etc) */
+    .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+    }
+    
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Six columns side by side */
+    .column {
+      /* float: left; */
+      width: 16.66%;
+      margin: 0px 15px 0px 15px;
+    }
+    
+    /* Add a transparency effect for thumnbail images */
+    .preview {
+      opacity: 0.6;
+    }
+    
+    .active,
+    .preview:hover {
+      opacity: 1;
+    }
+    </style>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("preview");
+      var captionText = document.getElementById("caption");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+      captionText.innerHTML = dots[slideIndex-1].alt;
+    }
+    </script>
+        
+
+
+
+
+
+
+
+
+
+
+
+

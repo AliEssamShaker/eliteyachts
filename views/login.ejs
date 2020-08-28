@@ -1,0 +1,48 @@
+<link rel="stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<body style="background-image: url('http://www.hdwallpaperspulse.com/wp-content/uploads/2018/10/30/free-hd-Ocean-Backgrounds.jpg');background-repeat: no-repeat;
+background-size: cover;">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/index">EliteYachts</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto ">
+            <%if(!currentUser){%>
+                <li class="nav-item"><a class="nav-link" href="/login">Login</a> </li>
+                <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a> </li>
+                <%} else {%>
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a> </li>
+
+                <%}%>
+            
+            
+        </ul>
+    </div>
+           
+</nav>
+
+
+<div class="container"> 
+    <p></p>
+    <%if(error && error.length>0){%>
+        <div class="alert alert-danger" role="alert"><%=error%> </div>
+
+    <%}%>    
+    
+</div>
+
+
+<p></p>
+<h1 style="text-align: center;">Login !</h1>
+<p></p>
+
+<form action="/login" method="POST">
+    <input style="width: 30%; margin: 15px auto;" class="form-control" type="text" name="username" placeholder="username">
+    <input style="width: 30%; margin: 15px auto;" class="form-control" type="password" name="password" placeholder="password">
+    <button style="width: 30%; margin: 0 auto;" class="btn btn-lg btn-primary btn-block">Login</button>
+</form>
+
+</body>

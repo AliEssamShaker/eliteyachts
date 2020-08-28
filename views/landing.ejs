@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EliteYachts</title>
+        <link rel="stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/stylesheets/landing.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+        <style>
+
+
+            .slideshow { 
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 0;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                }
+
+
+            .slideshow li { 
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-size: cover;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                opacity: 0;
+                z-index: 0;
+                animation: imageAnimation 50s linear infinite; 
+                }
+
+
+            .slideshow li:nth-child(1) { 
+                    background-image: url(https://images.unsplash.com/photo-1523496922380-91d5afba98a3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60) 
+                    }
+                    .slideshow li:nth-child(2) { 
+                    background-image: url(https://images.unsplash.com/photo-1533833348148-eb479b1837cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60https://images.unsplash.com/photo-1528904284820-7b671f484318?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60);
+                    animation-delay: 10s; 
+                    }
+                    .slideshow li:nth-child(3) { 
+                    background-image: url(https://images.unsplash.com/photo-1438798164535-f6a45922b74a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60);
+                    animation-delay: 20s; 
+                    }
+                    .slideshow li:nth-child(4) { 
+                    background-image: url(https://images.unsplash.com/photo-1504607704864-1b30a4298b62?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60);
+                    animation-delay: 30s; 
+                    }
+                    .slideshow li:nth-child(5) { 
+                    background-image: url(https://images.unsplash.com/photo-1513242285-8905cc370848?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60);
+                    animation-delay: 40s; 
+                    }
+
+
+                @keyframes imageAnimation { 
+                    0% { 
+                        opacity: 0; 
+                        animation-timing-function: ease-in;
+                    }
+                    10% {
+                        opacity: 1;
+                        animation-timing-function: ease-out;
+                    }
+                    20% {
+                        opacity: 1
+                    }
+                    30% {
+                        opacity: 0
+                    }
+                    }
+
+                .no-cssanimations .slideshow li {
+                    opacity: 1;
+                        }
+        
+        </style>
+    </head>
+    <body style="background-color: #000;">
+    
+        <div class="container">
+            <% if(error && error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+            <% if(success && success.length > 0){ %>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>
+        </div>
+        
+        <div id="landing-header" style="z-index: 1; position: relative; text-align: center; padding-top: 40vh;">
+            <h1 style="color: #fff;">Welcome to EliteYachts!</h1>
+            <a href="/index" class="btn btn-lg btn-success">View All Yachts</a>
+        </div>
+        
+        <ul class="slideshow">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        </ul>
+    </body>

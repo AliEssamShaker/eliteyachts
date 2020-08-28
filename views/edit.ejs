@@ -1,0 +1,64 @@
+<link rel="stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+<body style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTi0soP13aHgyjScBXkucYTDWyDFX9TdntdNKIz8ryJljoGLPud&usqp=CAU');background-repeat: no-repeat;
+background-size: cover;">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+  <div class="navbar-header">
+      <a class="navbar-brand" href="/index">EliteYachts</a>
+  </div>
+  <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto ">
+          <%if(!currentUser){%>
+              <li class="nav-item"><a class="nav-link" href="/login">Login</a> </li>
+              <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a> </li>
+              <%} else {%>
+              <li class="nav-item"><a class="nav-link" href="/logout">Logout</a> </li>
+
+              <%}%>
+          
+          
+      </ul>
+  </div>
+         
+</nav>
+
+<div class="container">
+    <p></p>
+    <h1> Edit <%=yacht.name%></h1>
+    <form action="/index/<%=yacht._id%>?_method=PUT" method="POST">
+        <div class="form-group">
+          <label>name</label>
+          <input type="text" class="form-control" id="name"  name="name"  value="<%=yacht.name%>" >
+        </div>
+        <div class="form-group"> 
+            <!-- <label>Attach Image</label>
+            <input type="file" class="form-control-file" id="image" name="yacht[image]"> -->
+            <label>image</label>
+            <input  type="file" id="image" name="image" value="<%=yacht.iamge%>" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" id="description" rows="4" name="description"> <%=yacht.description%></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>price</label>
+          <input type="text" class="form-control" id="price"  name="price"  value="<%=yacht.price%>" min="1.0" step="5000.0" >
+        </div>
+        <p></p>
+        <button class="btn btn-success">Update</button>
+      </form>
+
+
+</div>
+
+
+
+
+
+
+
